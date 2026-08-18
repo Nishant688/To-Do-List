@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#FAFAFC] text-slate-900;
+  }
+}
+
+/* Custom scrollbar for Kanban board and lists */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E2E8F0;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #CBD5E1;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Dragging visual cues */
+.kanban-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.kanban-card.is-dragging {
+  opacity: 0.4;
+  transform: scale(0.98);
+}
+
+.kanban-column.is-over {
+  background-color: #EEF2FF;
+  border-color: #C7D2FE;
+}
+
+.dark .kanban-column.is-over {
+  background-color: #1E1B4B;
+  border-color: #4338CA;
+}

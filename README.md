@@ -30,22 +30,32 @@ A modern full-stack productivity and task management web application built using
 - **Password Hashing** (`bcryptjs`)
 - **Morgan & CORS**
 
+### Mobile (iOS & Android)
+- **React Native** & **Expo SDK 52**
+- **TypeScript**
+- **React Navigation** (Bottom Tabs + Stack)
+- **Lucide React Native**
+- **Axios** (with JWT Interceptors)
+- **AsyncStorage**
+
 ### Database & Deployment
 - **MongoDB Community / MongoDB Atlas**
-- **Vercel / Netlify** (Frontend)
-- **Render / Railway** (Backend)
+- **Vercel / Netlify** (Web)
+- **Render / Railway** (Backend API)
+- **Expo EAS Build** (Mobile APK / iOS)
 
 ---
 
 ## ⚡ Features
 - 🔐 **JWT Authentication**: Secure signup, login, and protected API routes.
+- 📱 **Cross-Platform Parity**: React web app + native React Native mobile app sharing the same MongoDB database.
 - 📊 **Dynamic Dashboard Metrics**: Live calculation of total, completed, pending, and overdue tasks.
 - ⚡ **Quick-Add Task Bar**: Instantly schedule tasks for today with a single press of `Enter`.
-- 📋 **Interactive Kanban Board**: HTML5 drag-and-drop cards between To Do, In Progress, and Done columns.
+- 📋 **Interactive Kanban Board**: Drag-and-drop cards between To Do, In Progress, and Done columns with instant sync.
 - 🔍 **Real-Time Search & Filtering**: Substring search with filters for status, priority, and category.
 - 🎨 **Theme & Custom Preferences**: Light/Dark theme switch, default view selector, and calendar customization.
 - 🔑 **1-Click Demo Login**: Pre-seeded demo account for instant access without manual registration.
-- 📱 **Fully Responsive UI**: Optimized for mobile, tablet, and desktop viewports.
+- 📱 **Fully Responsive UI**: Native mobile UX with safe area, touch feedback, and responsive layout.
 
 ---
 
@@ -65,15 +75,29 @@ ToDoList/
 │   ├── test-e2e.js          # 15-point automated test suite
 │   └── package.json
 │
-└── frontend/
+├── frontend/
+│   ├── src/
+│   │   ├── components/      # UI components (board, dashboard, tasks, profile)
+│   │   ├── context/         # Auth, Task & Toast state contexts
+│   │   ├── pages/           # Dashboard, Tasks, Board, Profile, Auth pages
+│   │   ├── services/        # Axios API client & service modules
+│   │   ├── utils/           # Date and badge formatting helpers
+│   │   └── App.jsx          # Route declarations
+│   └── package.json
+│
+└── mobile/
     ├── src/
-    │   ├── components/      # UI components (board, dashboard, tasks, profile)
-    │   ├── context/         # Auth, Task & Toast state contexts
-    │   ├── pages/           # Dashboard, Tasks, Board, Profile, Auth pages
-    │   ├── services/        # Axios API client & service modules
-    │   ├── utils/           # Date and badge formatting helpers
-    │   └── App.jsx          # Route declarations
-    └── package.json
+    │   ├── components/      # Native mobile UI components
+    │   ├── context/         # Native Auth, Task & Theme contexts
+    │   ├── navigation/      # React Navigation (Tabs + Stacks)
+    │   ├── screens/         # Dashboard, Tasks, Board, Profile, Auth screens
+    │   ├── services/        # Mobile Axios API client
+    │   ├── theme/           # Native color tokens & dark/light palettes
+    │   └── utils/           # Date & status formatting helpers
+    ├── App.tsx              # Root component
+    ├── app.json             # Expo configuration
+    ├── package.json
+    └── README.md
 ```
 
 ---
@@ -191,11 +215,18 @@ npm run seed     # Seeds demo account (maya.chen@example.com / password123)
 npm run dev      # Runs API on http://localhost:5000
 ```
 
-### 3. Frontend Setup
+### 3. Frontend Setup (Web)
 ```bash
 cd ../frontend
 npm install
-npm run dev      # Runs app on http://localhost:5173
+npm run dev      # Runs web app on http://localhost:5173
+```
+
+### 4. Mobile Setup (iOS & Android)
+```bash
+cd ../mobile
+npm install
+npm start        # Starts Expo dev server (scan QR code in Expo Go app)
 ```
 
 ---

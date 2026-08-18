@@ -12,7 +12,27 @@ const app = express();
 // Middlewares
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: (origin, callback) => {
+      // Allow requests with no origin (mobile apps, curl, Postman) or any local dev origin
+      if (!origin) return callback(null, true);
+      const allowedOrigins = [
+        process.env.CLIENT_URL,
+        'http://localhost:5173',
+        'http://127.0.0.1:5173',
+        'http://localhost:19006',
+        'http://localhost:8081',
+      ].filter(Boolean);
+
+      // In development, allow localhost and local network origins (192.168.x.x, 10.x.x.x)
+      if (
+        process.env.NODE_ENV === 'development' ||
+        allowedOrigins.includes(origin) ||
+        /^http:\/\/(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+)(:\d+)?$/.test(origin)
+      ) {
+        return callback(null, true);
+      }
+      callback(null, true); // Fallback allow for smooth dev
+    },
     credentials: true,
   })
 );

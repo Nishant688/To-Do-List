@@ -1,0 +1,136 @@
+// TaskFlow Design Tokens & Color Palettes
+
+export const Colors = {
+  light: {
+    primary: '#5B50EC',
+    primaryLight: '#EDE9FE',
+    primaryDark: '#4338CA',
+    primaryHover: '#4F44E5',
+    background: '#FAFAFC',
+    card: '#FFFFFF',
+    text: '#0F172A',
+    textMuted: '#64748B',
+    textSubtle: '#94A3B8',
+    border: '#E2E8F0',
+    borderLight: '#F1F5F9',
+    inputBg: '#FFFFFF',
+    inputBorder: '#CBD5E1',
+    tabBarBg: '#FFFFFF',
+    tabBarBorder: '#E2E8F0',
+    tabBarActive: '#5B50EC',
+    tabBarInactive: '#94A3B8',
+    
+    // Status colors
+    todoBg: '#F1F5F9',
+    todoText: '#475569',
+    inProgressBg: '#EFF6FF',
+    inProgressText: '#2563EB',
+    doneBg: '#ECFDF5',
+    doneText: '#059669',
+    
+    // Priority badges
+    priorityHighBg: '#FEF2F2',
+    priorityHighText: '#DC2626',
+    priorityHighBorder: '#FECACA',
+    priorityMedBg: '#FFFBEB',
+    priorityMedText: '#D97706',
+    priorityMedBorder: '#FDE68A',
+    priorityLowBg: '#F0FDF4',
+    priorityLowText: '#16A34A',
+    priorityLowBorder: '#BBF7D0',
+
+    // Stat card icon backgrounds
+    statTotalBg: '#EEF2FF',
+    statTotalIcon: '#4F44E5',
+    statCompletedBg: '#ECFDF5',
+    statCompletedIcon: '#10B981',
+    statPendingBg: '#FFFBEB',
+    statPendingIcon: '#F59E0B',
+    statOverdueBg: '#FEF2F2',
+    statOverdueIcon: '#EF4444',
+
+    // Category pills
+    categoryWorkBg: '#EEF2FF',
+    categoryWorkText: '#4F44E5',
+    categoryPersonalBg: '#FDF2F8',
+    categoryPersonalText: '#DB2777',
+    categoryDesignBg: '#F5F3FF',
+    categoryDesignText: '#7C3AED',
+    categoryDevBg: '#ECFDF5',
+    categoryDevText: '#059669',
+    categoryOtherBg: '#F1F5F9',
+    categoryOtherText: '#475569',
+
+    danger: '#EF4444',
+    dangerBg: '#FEF2F2',
+    success: '#10B981',
+    warning: '#F59E0B',
+  },
+  dark: {
+    primary: '#7C3AED',
+    primaryLight: '#2E1065',
+    primaryDark: '#5B21B6',
+    primaryHover: '#6D28D9',
+    background: '#0F172A',
+    card: '#1E293B',
+    text: '#F8FAFC',
+    textMuted: '#94A3B8',
+    textSubtle: '#64748B',
+    border: '#334155',
+    borderLight: '#1E293B',
+    inputBg: '#1E293B',
+    inputBorder: '#475569',
+    tabBarBg: '#0F172A',
+    tabBarBorder: '#334155',
+    tabBarActive: '#A78BFA',
+    tabBarInactive: '#64748B',
+
+    // Status colors
+    todoBg: '#334155',
+    todoText: '#CBD5E1',
+    inProgressBg: '#1E3A8A',
+    inProgressText: '#60A5FA',
+    doneBg: '#064E3B',
+    doneText: '#34D399',
+
+    // Priority badges
+    priorityHighBg: '#450A0A',
+    priorityHighText: '#F87171',
+    priorityHighBorder: '#7F1D1D',
+    priorityMedBg: '#451A03',
+    priorityMedText: '#FBBF24',
+    priorityMedBorder: '#78350F',
+    priorityLowBg: '#052E16',
+    priorityLowText: '#4ADE80',
+    priorityLowBorder: '#14532D',
+
+    // Stat card icon backgrounds
+    statTotalBg: '#1E1B4B',
+    statTotalIcon: '#818CF8',
+    statCompletedBg: '#064E3B',
+    statCompletedIcon: '#34D399',
+    statPendingBg: '#451A03',
+    statPendingIcon: '#FBBF24',
+    statOverdueBg: '#450A0A',
+    statOverdueIcon: '#F87171',
+
+    // Category pills
+    categoryWorkBg: '#1E1B4B',
+    categoryWorkText: '#A5B4FC',
+    categoryPersonalBg: '#500724',
+    categoryPersonalText: '#F472B6',
+    categoryDesignBg: '#2E1065',
+    categoryDesignText: '#C4B5FD',
+    categoryDevBg: '#064E3B',
+    categoryDevText: '#6EE7B7',
+    categoryOtherBg: '#334155',
+    categoryOtherText: '#CBD5E1',
+
+    danger: '#F87171',
+    dangerBg: '#450A0A',
+    success: '#34D399',
+    warning: '#FBBF24',
+  },
+};
+
+export type ThemeColors = typeof Colors.light;

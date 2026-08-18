@@ -136,8 +136,8 @@ Ensure you have the following installed on your machine:
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/Nishant688/taskflow-fullstack.git
-cd taskflow-fullstack
+git clone https://github.com/Nishant688/To-Do-List.git
+cd To-Do-List
 ```
 
 ---

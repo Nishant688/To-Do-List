@@ -5,7 +5,10 @@ import app from './src/app.js';
 import { connectDB } from './src/config/db.js';
 
 // Connect to MongoDB
-connectDB();
+connectDB().catch((err) => {
+  console.warn(`[Database Warning] Could not connect to MongoDB on startup: ${err.message}`);
+});
+
 
 const PORT = process.env.PORT || 5000;
 

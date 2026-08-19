@@ -66,4 +66,4 @@ taskSchema.pre('save', function (next) {
   next();
 });
 
-export const Task = mongoose.model('Task', taskSchema);
+export const Task = mongoose.models.Task || mongoose.model('Task', taskSchema);

@@ -1,5 +1,5 @@
-// Comprehensive End-to-End API and Flow Test Suite
-const API_URL = 'http://localhost:5000/api';
+const API_URL = process.env.API_URL || 'http://localhost:5000/api';
+
 
 async function runTests() {
   console.log('🚀 Starting TaskFlow End-to-End Automated Test Suite...\n');

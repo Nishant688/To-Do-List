@@ -1,20 +1,53 @@
 import mongoose from 'mongoose';
 
-let isConnected = false;
+/**
+ * Global cache for Mongoose connection across serverless invocations.
+ * In development and serverless functions, this prevents creating multiple
+ * database connections on each invocation / hot reload.
+ */
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
 
 export const connectDB = async () => {
-  if (isConnected || mongoose.connection.readyState >= 1) {
-    return mongoose.connection;
+  // If connection is already open and ready, reuse it
+  if (cached.conn && mongoose.connection.readyState >= 1) {
+    return cached.conn;
   }
+
+  const mongoUri =
+    process.env.MONGODB_URI ||
+    process.env.MONGO_URI ||
+    'mongodb://127.0.0.1:27017/taskflow';
+
+  if (!cached.promise) {
+    const opts = {
+      bufferCommands: false,
+      maxPoolSize: 10,
+      serverSelectionTimeoutMS: 8000,
+    };
+
+    cached.promise = mongoose
+      .connect(mongoUri, opts)
+      .then((mongooseInstance) => {
+        console.log(`[Database] MongoDB Connected: ${mongooseInstance.connection.host}`);
+        return mongooseInstance;
+      })
+      .catch((err) => {
+        cached.promise = null;
+        console.error(`[Database Connection Error] ${err.message}`);
+        throw err;
+      });
+  }
+
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/taskflow');
-    isConnected = true;
-    console.log(`[Database] MongoDB Connected: ${conn.connection.host}`);
-    return conn;
+    cached.conn = await cached.promise;
+    return cached.conn;
   } catch (error) {
-    console.error(`[Database Error] ${error.message}`);
-    if (process.env.NODE_ENV !== 'production') {
-      process.exit(1);
-    }
+    cached.promise = null;
+    throw error;
   }
 };
+

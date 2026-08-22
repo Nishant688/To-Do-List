@@ -37,11 +37,10 @@ export const BoardColumn = ({
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
-      className={`kanban-column flex-1 min-w-[280px] sm:min-w-[300px] bg-slate-50/70 dark:bg-slate-900/50 border border-slate-200/70 dark:border-slate-800/80 rounded-2xl p-4 flex flex-col transition-colors duration-150 ${
-        isOver ? 'is-over ring-2 ring-brand-400 dark:ring-brand-500' : ''
-      }`}
+      className={`kanban-column flex-1 min-w-[280px] sm:min-w-[300px] bg-slate-50/70 dark:bg-slate-900/50 border border-slate-200/70 dark:border-slate-800/80 rounded-2xl p-4 flex flex-col transition-colors duration-150 ${isOver ? 'is-over ring-2 ring-brand-400 dark:ring-brand-500' : ''
+        }`}
     >
-      {/* Column Header */}
+
       <div className="flex items-center justify-between mb-4 px-1">
         <div className="flex items-center gap-2.5">
           <span className={`w-2.5 h-2.5 rounded-full ${dotColor}`} />
@@ -54,7 +53,6 @@ export const BoardColumn = ({
         </span>
       </div>
 
-      {/* Column Task Cards */}
       <div className="flex-1 space-y-3 min-h-[300px] overflow-y-auto">
         {loading && tasks.length === 0 ? (
           <>

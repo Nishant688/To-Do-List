@@ -34,17 +34,16 @@ export const TaskRow = ({ task, onEdit }) => {
         onClick={() => onEdit && onEdit(task)}
         className="group flex items-center justify-between px-4 py-3.5 hover:bg-slate-50/80 dark:hover:bg-slate-800/40 border-b border-slate-100 dark:border-slate-800/60 last:border-b-0 transition-colors cursor-pointer"
       >
-        {/* Left: Checkbox + Priority Dot + Title */}
+
         <div className="flex items-center gap-3 min-w-0 pr-4">
-          {/* Custom Checkbox */}
+
           <button
             type="button"
             onClick={handleCheckboxClick}
-            className={`w-4 h-4 rounded-full border flex items-center justify-center transition-colors shrink-0 ${
-              isCompleted
+            className={`w-4 h-4 rounded-full border flex items-center justify-center transition-colors shrink-0 ${isCompleted
                 ? 'bg-brand-500 border-brand-500 text-white'
                 : 'border-slate-300 dark:border-slate-600 hover:border-brand-400 bg-white dark:bg-slate-900'
-            }`}
+              }`}
             aria-label={isCompleted ? 'Mark task as active' : 'Mark task as complete'}
           >
             {isCompleted && (
@@ -63,30 +62,25 @@ export const TaskRow = ({ task, onEdit }) => {
             )}
           </button>
 
-          {/* Priority Dot */}
           <PriorityDot
             priority={task.priority}
             className={isCompleted ? 'opacity-40' : ''}
           />
 
-          {/* Task Title */}
           <span
-            className={`text-sm font-medium truncate transition-colors ${
-              isCompleted
+            className={`text-sm font-medium truncate transition-colors ${isCompleted
                 ? 'line-through text-slate-400 dark:text-slate-500'
                 : 'text-slate-800 dark:text-slate-200'
-            }`}
+              }`}
           >
             {task.title}
           </span>
         </div>
 
-        {/* Right: Category + Due Date + Delete Action */}
         <div className="flex items-center gap-2.5 shrink-0">
           <CategoryBadge category={task.category} />
           <DueDateBadge dueDate={task.dueDate} completed={isCompleted} />
 
-          {/* Delete Icon */}
           <button
             type="button"
             onClick={handleDeleteClick}
@@ -98,7 +92,6 @@ export const TaskRow = ({ task, onEdit }) => {
         </div>
       </div>
 
-      {/* Delete Confirmation Modal */}
       <ConfirmModal
         isOpen={showDeleteConfirm}
         onClose={() => setShowDeleteConfirm(false)}

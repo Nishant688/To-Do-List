@@ -22,48 +22,44 @@ export const TaskFilterBar = () => {
 
   return (
     <div className="space-y-4">
-      {/* Top Filter Controls: Status Tabs & Dropdowns */}
+
       <div className="flex flex-wrap items-center justify-between gap-3">
-        {/* Status Filter Tabs (All / Active / Completed) */}
+
         <div className="flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-slate-800/80 rounded-xl">
           <button
             type="button"
             onClick={() => setFilterStatus('all')}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-              filterStatus === 'all'
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${filterStatus === 'all'
                 ? 'bg-slate-900 text-white dark:bg-slate-700 shadow-xs'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-            }`}
+              }`}
           >
             All ({totalCount})
           </button>
           <button
             type="button"
             onClick={() => setFilterStatus('active')}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-              filterStatus === 'active'
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${filterStatus === 'active'
                 ? 'bg-slate-900 text-white dark:bg-slate-700 shadow-xs'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-            }`}
+              }`}
           >
             Active ({activeCount})
           </button>
           <button
             type="button"
             onClick={() => setFilterStatus('completed')}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-              filterStatus === 'completed'
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${filterStatus === 'completed'
                 ? 'bg-slate-900 text-white dark:bg-slate-700 shadow-xs'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-            }`}
+              }`}
           >
             Completed ({completedCount})
           </button>
         </div>
 
-        {/* Priority & Sort Dropdowns */}
         <div className="flex items-center gap-2.5">
-          {/* Priority Dropdown */}
+
           <div className="relative">
             <select
               value={filterPriority}
@@ -78,7 +74,6 @@ export const TaskFilterBar = () => {
             <ChevronDown className="w-3.5 h-3.5 text-slate-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
 
-          {/* Sort Dropdown */}
           <div className="relative">
             <select
               value={sortBy}
@@ -95,7 +90,6 @@ export const TaskFilterBar = () => {
         </div>
       </div>
 
-      {/* Search Input Bar */}
       <div className="relative">
         <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
         <input

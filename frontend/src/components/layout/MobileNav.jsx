@@ -17,11 +17,11 @@ export const MobileNav = () => {
 
   const initials = user?.name
     ? user.name
-        .split(' ')
-        .map((n) => n[0])
-        .join('')
-        .toUpperCase()
-        .substring(0, 2)
+      .split(' ')
+      .map((n) => n[0])
+      .join('')
+      .toUpperCase()
+      .substring(0, 2)
     : 'MC';
 
   const handleNavClick = (path) => {
@@ -61,7 +61,6 @@ export const MobileNav = () => {
         </button>
       </div>
 
-      {/* Drawer Overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-40"
@@ -69,11 +68,9 @@ export const MobileNav = () => {
         />
       )}
 
-      {/* Mobile Drawer */}
       <div
-        className={`fixed top-0 left-0 bottom-0 w-64 bg-white dark:bg-slate-900 z-50 p-6 flex flex-col justify-between transform transition-transform duration-200 ease-in-out ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`fixed top-0 left-0 bottom-0 w-64 bg-white dark:bg-slate-900 z-50 p-6 flex flex-col justify-between transform transition-transform duration-200 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
       >
         <div>
           <div className="flex items-center justify-between mb-8">
@@ -113,21 +110,19 @@ export const MobileNav = () => {
                   to={item.path}
                   onClick={() => setIsOpen(false)}
                   className={({ isActive }) =>
-                    `flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-                      isActive
-                        ? 'bg-brand-50 text-brand-600 dark:bg-brand-950/50 dark:text-brand-300 font-semibold'
-                        : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800'
+                    `flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${isActive
+                      ? 'bg-brand-50 text-brand-600 dark:bg-brand-950/50 dark:text-brand-300 font-semibold'
+                      : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800'
                     }`
                   }
                 >
                   {({ isActive }) => (
                     <>
                       <Icon
-                        className={`w-4 h-4 ${
-                          isActive
+                        className={`w-4 h-4 ${isActive
                             ? 'text-brand-500 dark:text-brand-400'
                             : 'text-slate-500'
-                        }`}
+                          }`}
                       />
                       <span>{item.name}</span>
                     </>
@@ -138,7 +133,6 @@ export const MobileNav = () => {
           </nav>
         </div>
 
-        {/* Profile Footer */}
         <div
           onClick={() => handleNavClick('/profile')}
           className="flex items-center gap-3 p-2 -mx-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 cursor-pointer"

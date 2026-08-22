@@ -23,25 +23,21 @@ export const ProfilePage = () => {
 
   return (
     <div className="space-y-7 max-w-3xl animate-in fade-in duration-200">
-      {/* Header */}
+
       <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
         Profile & Settings
       </h1>
 
-      {/* Profile Card */}
       <ProfileCard onEditProfile={() => setIsEditProfileOpen(true)} />
 
-      {/* Preferences Section */}
       <PreferencesCard />
 
-      {/* Account Section */}
       <AccountCard
         onChangePassword={() => setIsChangePasswordOpen(true)}
         onLogout={handleLogout}
         onDeleteAccount={() => setIsDeleteAccountOpen(true)}
       />
 
-      {/* Modals */}
       <EditProfileModal
         isOpen={isEditProfileOpen}
         onClose={() => setIsEditProfileOpen(false)}

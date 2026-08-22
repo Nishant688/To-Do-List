@@ -1,4 +1,3 @@
-// Utility functions for task date formatting and greetings
 
 export const getGreeting = (name = 'User') => {
   const hour = new Date().getHours();
@@ -31,7 +30,6 @@ export const getDueStatus = (dueDate, completed = false) => {
   const due = new Date(dueDate);
   const now = new Date();
 
-  // Strip time for pure day difference comparison
   const dueDay = new Date(due.getFullYear(), due.getMonth(), due.getDate());
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
@@ -81,14 +79,12 @@ export const getDueStatus = (dueDate, completed = false) => {
     };
   }
 
-  // Format: "Sun, Jul 19"
   const formatted = new Intl.DateTimeFormat('en-US', {
     weekday: 'short',
     month: 'short',
     day: 'numeric',
   }).format(due);
 
-  // Short board format: "Jul 22" or "Sun, Jul 19"
   const boardFormatted = new Intl.DateTimeFormat('en-US', {
     month: 'short',
     day: 'numeric',

@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */
+
 export default {
   content: [
     "./index.html",
@@ -14,7 +14,7 @@ export default {
           200: '#DDD6FE',
           300: '#C4B5FD',
           400: '#A78BFA',
-          500: '#5B50EC', // Primary purple
+          500: '#5B50EC', 
           600: '#4F44E5',
           700: '#4338CA',
           800: '#3730A3',

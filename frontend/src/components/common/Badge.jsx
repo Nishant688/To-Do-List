@@ -1,7 +1,6 @@
 import React from 'react';
 import { getDueStatus } from '../../utils/dateUtils';
 
-// Category Badge (Pastel styling matching reference screenshots)
 export const CategoryBadge = ({ category = 'Work' }) => {
   const cat = category.toLowerCase();
 
@@ -22,7 +21,6 @@ export const CategoryBadge = ({ category = 'Work' }) => {
   );
 };
 
-// Priority Dot (Red, Amber, Green)
 export const PriorityDot = ({ priority = 'medium', className = '' }) => {
   const p = priority.toLowerCase();
   let color = 'bg-amber-400';
@@ -37,7 +35,6 @@ export const PriorityDot = ({ priority = 'medium', className = '' }) => {
   );
 };
 
-// Priority Badge for Board Cards (e.g. HIGH, MED, LOW)
 export const PriorityBadge = ({ priority = 'medium' }) => {
   const p = priority.toLowerCase();
 
@@ -64,7 +61,6 @@ export const PriorityBadge = ({ priority = 'medium' }) => {
   );
 };
 
-// Due Date Badge (e.g. '1 day overdue', 'Today', 'Tomorrow', 'Sun, Jul 19')
 export const DueDateBadge = ({ dueDate, completed = false, isBoard = false }) => {
   const status = getDueStatus(dueDate, completed);
   if (!status) return null;

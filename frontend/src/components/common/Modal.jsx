@@ -16,13 +16,12 @@ export const Modal = ({ isOpen, onClose, title, children, maxWidth = 'max-w-lg' 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Backdrop */}
+
       <div
         className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs transition-opacity animate-in fade-in"
         onClick={onClose}
       />
 
-      {/* Modal Dialog Card */}
       <div
         className={`relative w-full ${maxWidth} bg-white dark:bg-slate-900 rounded-2xl shadow-modal border border-slate-200/80 dark:border-slate-800 p-6 z-10 animate-in zoom-in-95 duration-200`}
       >

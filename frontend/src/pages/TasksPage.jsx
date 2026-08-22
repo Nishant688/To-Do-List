@@ -29,7 +29,7 @@ export const TasksPage = () => {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
-      {/* Header Section with View Switcher and New Task Button */}
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -40,9 +40,8 @@ export const TasksPage = () => {
           </p>
         </div>
 
-        {/* View Switcher & Action Button */}
         <div className="flex items-center gap-3">
-          {/* List / Board Switcher */}
+
           <div className="flex items-center p-1 bg-slate-100 dark:bg-slate-800 rounded-xl">
             <button
               type="button"
@@ -59,7 +58,6 @@ export const TasksPage = () => {
             </button>
           </div>
 
-          {/* New Task Button */}
           <button
             type="button"
             onClick={handleCreateNew}
@@ -71,10 +69,8 @@ export const TasksPage = () => {
         </div>
       </div>
 
-      {/* Filter and Search Bar */}
       <TaskFilterBar />
 
-      {/* Task List Container Card */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl shadow-card overflow-hidden">
         {loading && filteredTasks.length === 0 ? (
           <>
@@ -100,7 +96,6 @@ export const TasksPage = () => {
         )}
       </div>
 
-      {/* Task Create/Edit Modal */}
       <TaskModal
         isOpen={isModalOpen}
         onClose={() => {

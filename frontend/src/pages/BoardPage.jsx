@@ -28,7 +28,7 @@ export const BoardPage = () => {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
-      {/* Header with Switcher and New Task Button */}
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -39,9 +39,8 @@ export const BoardPage = () => {
           </p>
         </div>
 
-        {/* View Switcher & Action Button */}
         <div className="flex items-center gap-3">
-          {/* List / Board Switcher */}
+
           <div className="flex items-center p-1 bg-slate-100 dark:bg-slate-800 rounded-xl">
             <button
               type="button"
@@ -58,7 +57,6 @@ export const BoardPage = () => {
             </button>
           </div>
 
-          {/* New Task Button */}
           <button
             type="button"
             onClick={handleCreateNew}
@@ -70,7 +68,6 @@ export const BoardPage = () => {
         </div>
       </div>
 
-      {/* Kanban Board Columns Grid */}
       <div className="flex flex-col md:flex-row gap-5 overflow-x-auto pb-4 pt-1">
         <BoardColumn
           id="todo"
@@ -101,7 +98,6 @@ export const BoardPage = () => {
         />
       </div>
 
-      {/* Task Create/Edit Modal */}
       <TaskModal
         isOpen={isModalOpen}
         onClose={() => {

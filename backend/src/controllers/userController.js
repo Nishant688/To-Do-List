@@ -1,9 +1,6 @@
 import { User } from '../models/User.js';
 import { Task } from '../models/Task.js';
 
-// @desc    Get user profile
-// @route   GET /api/users/profile
-// @access  Private
 export const getUserProfile = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id);
@@ -21,9 +18,6 @@ export const getUserProfile = async (req, res, next) => {
   }
 };
 
-// @desc    Update user profile (name, email, avatar)
-// @route   PUT /api/users/profile
-// @access  Private
 export const updateUserProfile = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id);
@@ -36,7 +30,7 @@ export const updateUserProfile = async (req, res, next) => {
 
     if (name) user.name = name.trim();
     if (email && email.toLowerCase().trim() !== user.email) {
-      // Check if email already taken
+
       const emailExists = await User.findOne({
         email: email.toLowerCase().trim(),
         _id: { $ne: user._id },
@@ -61,9 +55,6 @@ export const updateUserProfile = async (req, res, next) => {
   }
 };
 
-// @desc    Update user password
-// @route   PUT /api/users/password
-// @access  Private
 export const updateUserPassword = async (req, res, next) => {
   try {
     const { currentPassword, newPassword, confirmNewPassword } = req.body;
@@ -83,14 +74,12 @@ export const updateUserPassword = async (req, res, next) => {
       throw new Error('New password must be at least 6 characters');
     }
 
-    // Get user with password
     const user = await User.findById(req.user._id).select('+password');
     if (!user) {
       res.status(404);
       throw new Error('User not found');
     }
 
-    // Check current password
     const isMatch = await user.matchPassword(currentPassword);
     if (!isMatch) {
       res.status(400);
@@ -109,9 +98,6 @@ export const updateUserPassword = async (req, res, next) => {
   }
 };
 
-// @desc    Update user preferences (theme, defaultView, weekStartsOn, emailReminders)
-// @route   PUT /api/users/preferences
-// @access  Private
 export const updateUserPreferences = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id);
@@ -144,17 +130,12 @@ export const updateUserPreferences = async (req, res, next) => {
   }
 };
 
-// @desc    Delete user account and all associated tasks
-// @route   DELETE /api/users/account
-// @access  Private
 export const deleteUserAccount = async (req, res, next) => {
   try {
     const userId = req.user._id;
 
-    // Delete all tasks belonging to user
     await Task.deleteMany({ userId });
 
-    // Delete user
     await User.findByIdAndDelete(userId);
 
     res.status(200).json({

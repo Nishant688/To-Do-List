@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { User } from '../models/User.js';
 
-// Helper to generate JWT
 const generateToken = (id) => {
   return jwt.sign(
     { id },
@@ -12,9 +11,6 @@ const generateToken = (id) => {
   );
 };
 
-// @desc    Register a new user
-// @route   POST /api/auth/register
-// @access  Public
 export const registerUser = async (req, res, next) => {
   try {
     const { name, email, password, confirmPassword } = req.body;
@@ -34,14 +30,12 @@ export const registerUser = async (req, res, next) => {
       throw new Error('Password must be at least 6 characters');
     }
 
-    // Check if user already exists
     const userExists = await User.findOne({ email: email.toLowerCase().trim() });
     if (userExists) {
       res.status(400);
       throw new Error('User already exists with this email');
     }
 
-    // Create user
     const user = await User.create({
       name: name.trim(),
       email: email.toLowerCase().trim(),
@@ -69,9 +63,6 @@ export const registerUser = async (req, res, next) => {
   }
 };
 
-// @desc    Authenticate user & get token
-// @route   POST /api/auth/login
-// @access  Public
 export const loginUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -81,7 +72,6 @@ export const loginUser = async (req, res, next) => {
       throw new Error('Please provide email and password');
     }
 
-    // Find user by email and explicitly include password for verification
     const user = await User.findOne({ email: email.toLowerCase().trim() }).select('+password');
 
     if (!user || !(await user.matchPassword(password))) {
@@ -110,9 +100,6 @@ export const loginUser = async (req, res, next) => {
   }
 };
 
-// @desc    Get current authenticated user profile
-// @route   GET /api/auth/me
-// @access  Private
 export const getMe = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id);
@@ -130,9 +117,6 @@ export const getMe = async (req, res, next) => {
   }
 };
 
-// @desc    Logout user
-// @route   POST /api/auth/logout
-// @access  Public
 export const logoutUser = async (req, res) => {
   res.status(200).json({
     success: true,

@@ -14,12 +14,10 @@ const seedDatabase = async () => {
     await mongoose.connect(mongoUri);
     console.log('[Seed] Connected to MongoDB');
 
-    // Clean up existing data for clean demo
     await User.deleteMany({});
     await Task.deleteMany({});
     console.log('[Seed] Cleared existing Users and Tasks');
 
-    // Create Demo User Maya Chen
     const maya = await User.create({
       name: 'Maya Chen',
       email: 'maya.chen@example.com',
@@ -35,7 +33,6 @@ const seedDatabase = async () => {
     });
     console.log(`[Seed] Created User: ${maya.name} (${maya.email})`);
 
-    // Reference dates based on current day
     const now = new Date();
     const getDateWithOffset = (offsetDays, hours = 17, minutes = 0) => {
       const d = new Date(now);
@@ -44,7 +41,6 @@ const seedDatabase = async () => {
       return d;
     };
 
-    // Realistic tasks matching reference design screenshots
     const sampleTasks = [
       {
         title: 'Fix mobile nav overflow bug',
@@ -52,7 +48,7 @@ const seedDatabase = async () => {
         status: 'in_progress',
         priority: 'high',
         category: 'Dev',
-        dueDate: getDateWithOffset(-3, 14, 0), // 3 days overdue
+        dueDate: getDateWithOffset(-3, 14, 0), 
         completed: false,
         order: 1,
         userId: maya._id,
@@ -63,7 +59,7 @@ const seedDatabase = async () => {
         status: 'in_progress',
         priority: 'high',
         category: 'Work',
-        dueDate: getDateWithOffset(-1, 16, 0), // 1 day overdue
+        dueDate: getDateWithOffset(-1, 16, 0), 
         completed: false,
         order: 2,
         userId: maya._id,
@@ -74,7 +70,7 @@ const seedDatabase = async () => {
         status: 'todo',
         priority: 'high',
         category: 'Work',
-        dueDate: getDateWithOffset(0, 15, 0), // Today
+        dueDate: getDateWithOffset(0, 15, 0), 
         completed: false,
         order: 3,
         userId: maya._id,
@@ -85,7 +81,7 @@ const seedDatabase = async () => {
         status: 'in_progress',
         priority: 'medium',
         category: 'Dev',
-        dueDate: getDateWithOffset(0, 18, 0), // Today
+        dueDate: getDateWithOffset(0, 18, 0), 
         completed: false,
         order: 4,
         userId: maya._id,
@@ -96,7 +92,7 @@ const seedDatabase = async () => {
         status: 'todo',
         priority: 'medium',
         category: 'Work',
-        dueDate: getDateWithOffset(0, 17, 30), // Today
+        dueDate: getDateWithOffset(0, 17, 30), 
         completed: false,
         order: 5,
         userId: maya._id,
@@ -107,7 +103,7 @@ const seedDatabase = async () => {
         status: 'todo',
         priority: 'medium',
         category: 'Work',
-        dueDate: getDateWithOffset(1, 10, 0), // Tomorrow
+        dueDate: getDateWithOffset(1, 10, 0), 
         completed: false,
         order: 6,
         userId: maya._id,
@@ -118,7 +114,7 @@ const seedDatabase = async () => {
         status: 'todo',
         priority: 'low',
         category: 'Personal',
-        dueDate: getDateWithOffset(2, 19, 0), // +2 days
+        dueDate: getDateWithOffset(2, 19, 0), 
         completed: false,
         order: 7,
         userId: maya._id,
@@ -129,7 +125,7 @@ const seedDatabase = async () => {
         status: 'todo',
         priority: 'medium',
         category: 'Design',
-        dueDate: getDateWithOffset(3, 11, 0), // +3 days
+        dueDate: getDateWithOffset(3, 11, 0), 
         completed: false,
         order: 8,
         userId: maya._id,
@@ -140,7 +136,7 @@ const seedDatabase = async () => {
         status: 'todo',
         priority: 'low',
         category: 'Design',
-        dueDate: getDateWithOffset(4, 14, 0), // +4 days
+        dueDate: getDateWithOffset(4, 14, 0), 
         completed: false,
         order: 9,
         userId: maya._id,
@@ -151,7 +147,7 @@ const seedDatabase = async () => {
         status: 'todo',
         priority: 'high',
         category: 'Personal',
-        dueDate: getDateWithOffset(6, 16, 0), // +6 days
+        dueDate: getDateWithOffset(6, 16, 0), 
         completed: false,
         order: 10,
         userId: maya._id,
@@ -162,7 +158,7 @@ const seedDatabase = async () => {
         status: 'done',
         priority: 'low',
         category: 'Personal',
-        dueDate: getDateWithOffset(0, 11, 0), // Today
+        dueDate: getDateWithOffset(0, 11, 0), 
         completed: true,
         order: 11,
         userId: maya._id,
@@ -173,7 +169,7 @@ const seedDatabase = async () => {
         status: 'done',
         priority: 'low',
         category: 'Dev',
-        dueDate: getDateWithOffset(5, 12, 0), // +5 days
+        dueDate: getDateWithOffset(5, 12, 0), 
         completed: true,
         order: 12,
         userId: maya._id,

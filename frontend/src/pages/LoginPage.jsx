@@ -53,7 +53,7 @@ export const LoginPage = () => {
   return (
     <div className="min-h-screen bg-[#FAFAFC] dark:bg-[#0F172A] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 animate-in fade-in duration-200">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        {/* Logo */}
+
         <div className="flex justify-center">
           <div className="w-11 h-11 rounded-2xl bg-brand-500 flex items-center justify-center text-white shadow-card">
             <svg
@@ -87,7 +87,6 @@ export const LoginPage = () => {
               </div>
             )}
 
-            {/* Email Field */}
             <div>
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                 Email Address
@@ -105,7 +104,6 @@ export const LoginPage = () => {
               </div>
             </div>
 
-            {/* Password Field */}
             <div>
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                 Password
@@ -130,7 +128,6 @@ export const LoginPage = () => {
               </div>
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
@@ -140,7 +137,6 @@ export const LoginPage = () => {
             </button>
           </form>
 
-          {/* Quick Demo Login Pill */}
           <div className="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800 text-center">
             <button
               type="button"
@@ -152,7 +148,6 @@ export const LoginPage = () => {
           </div>
         </div>
 
-        {/* Register Link */}
         <p className="mt-6 text-center text-xs text-slate-500 dark:text-slate-400">
           Don't have an account?{' '}
           <Link

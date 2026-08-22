@@ -13,7 +13,6 @@ import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
-// Protected Route Guard
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
   const location = useLocation();
@@ -33,7 +32,6 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
-// Public Route Guard (redirects already logged-in users to dashboard)
 const PublicRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
 
@@ -59,7 +57,7 @@ export function App() {
         <AuthProvider>
           <TaskProvider>
             <Routes>
-              {/* Public Auth Routes */}
+
               <Route
                 path="/login"
                 element={
@@ -77,7 +75,6 @@ export function App() {
                 }
               />
 
-              {/* Protected App Routes */}
               <Route
                 path="/"
                 element={

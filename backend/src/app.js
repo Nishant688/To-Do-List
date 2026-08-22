@@ -10,11 +10,10 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 const app = express();
 
-// Middlewares
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (e.g. mobile apps, curl, Postman, server-to-server)
+
       if (!origin) return callback(null, true);
 
       const allowedOrigins = [
@@ -49,7 +48,6 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-// Ensure database connection is active for each request (critical for serverless environments)
 app.use(async (req, res, next) => {
   try {
     await connectDB();
@@ -60,7 +58,6 @@ app.use(async (req, res, next) => {
   }
 });
 
-// Health check endpoint handler
 const healthHandler = (req, res) => {
   res.status(200).json({
     status: 'ok',
@@ -72,7 +69,6 @@ const healthHandler = (req, res) => {
 app.get('/api/health', healthHandler);
 app.get('/health', healthHandler);
 
-// API Routes (Mounted under both /api/* and /* for compatibility with all Vercel/proxy rewrites)
 app.use('/api/auth', authRoutes);
 app.use('/auth', authRoutes);
 
@@ -82,9 +78,7 @@ app.use('/tasks', taskRoutes);
 app.use('/api/users', userRoutes);
 app.use('/users', userRoutes);
 
-// Error Handling Middlewares
 app.use(notFound);
 app.use(errorHandler);
 
 export default app;
-

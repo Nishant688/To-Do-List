@@ -21,14 +21,12 @@ export const TaskProvider = ({ children }) => {
   });
   const [loading, setLoading] = useState(false);
 
-  // Filter & Search states
-  const [filterStatus, setFilterStatus] = useState('all'); // 'all' | 'active' | 'completed'
-  const [filterPriority, setFilterPriority] = useState('all'); // 'all' | 'low' | 'medium' | 'high'
+  const [filterStatus, setFilterStatus] = useState('all'); 
+  const [filterPriority, setFilterPriority] = useState('all'); 
   const [filterCategory, setFilterCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState('dueDate'); // 'dueDate' | 'priority' | 'title' | 'createdAt'
+  const [sortBy, setSortBy] = useState('dueDate'); 
 
-  // Fetch all tasks and stats
   const fetchTasks = useCallback(async () => {
     if (!isAuthenticated) return;
     try {
@@ -51,7 +49,6 @@ export const TaskProvider = ({ children }) => {
     }
   }, [isAuthenticated]);
 
-  // Initial load
   useEffect(() => {
     if (isAuthenticated) {
       fetchTasks();
@@ -61,14 +58,13 @@ export const TaskProvider = ({ children }) => {
     }
   }, [isAuthenticated, fetchTasks]);
 
-  // Create Task
   const createTask = async (taskData) => {
     try {
       const res = await taskService.createTask(taskData);
       if (res.success && res.data) {
         setTasks((prev) => [res.data, ...prev]);
         showSuccess('Task created successfully');
-        // Refresh stats
+
         taskService.getStats().then((s) => s.success && setStats(s.data));
         return res.data;
       }
@@ -79,7 +75,6 @@ export const TaskProvider = ({ children }) => {
     }
   };
 
-  // Quick Add Task (for Dashboard)
   const quickAddTask = async (title) => {
     if (!title || !title.trim()) return;
     return createTask({
@@ -91,7 +86,6 @@ export const TaskProvider = ({ children }) => {
     });
   };
 
-  // Update Task
   const updateTask = async (id, taskData) => {
     try {
       const res = await taskService.updateTask(id, taskData);
@@ -108,9 +102,8 @@ export const TaskProvider = ({ children }) => {
     }
   };
 
-  // Update Status (Kanban Drag and Drop)
   const updateTaskStatus = async (id, newStatus) => {
-    // Optimistic UI update
+
     const previousTasks = [...tasks];
     setTasks((prev) =>
       prev.map((t) => {
@@ -131,13 +124,12 @@ export const TaskProvider = ({ children }) => {
         taskService.getStats().then((s) => s.success && setStats(s.data));
       }
     } catch (err) {
-      // Rollback
+
       setTasks(previousTasks);
       showError('Failed to move task');
     }
   };
 
-  // Toggle Complete (Checkbox)
   const toggleTaskComplete = async (id) => {
     const previousTasks = [...tasks];
     setTasks((prev) =>
@@ -165,7 +157,6 @@ export const TaskProvider = ({ children }) => {
     }
   };
 
-  // Delete Task
   const deleteTask = async (id) => {
     const previousTasks = [...tasks];
     setTasks((prev) => prev.filter((t) => t._id !== id));
@@ -182,23 +173,20 @@ export const TaskProvider = ({ children }) => {
     }
   };
 
-  // Derived: Filtered & Sorted Tasks for Tasks Page
   const filteredTasks = useMemo(() => {
     return tasks
       .filter((task) => {
-        // Status filter
+
         if (filterStatus === 'active') {
           if (task.completed || task.status === 'done') return false;
         } else if (filterStatus === 'completed') {
           if (!task.completed && task.status !== 'done') return false;
         }
 
-        // Priority filter
         if (filterPriority !== 'all' && filterPriority !== 'All priorities') {
           if (task.priority?.toLowerCase() !== filterPriority.toLowerCase()) return false;
         }
 
-        // Search filter
         if (searchQuery.trim()) {
           const q = searchQuery.toLowerCase().trim();
           const matchTitle = task.title?.toLowerCase().includes(q);
@@ -229,8 +217,6 @@ export const TaskProvider = ({ children }) => {
       });
   }, [tasks, filterStatus, filterPriority, searchQuery, sortBy]);
 
-  // Derived: Dashboard "Today" Tasks
-  // Tasks due today, or overdue tasks that are not done, or tasks marked completed today
   const todayTasks = useMemo(() => {
     return tasks.filter((task) => {
       const status = getDueStatus(task.dueDate, task.completed);
@@ -239,8 +225,6 @@ export const TaskProvider = ({ children }) => {
     });
   }, [tasks]);
 
-  // Derived: Dashboard "Due Soon" Tasks
-  // Tasks due in future days (tomorrow, etc.)
   const dueSoonTasks = useMemo(() => {
     return tasks.filter((task) => {
       if (task.completed || task.status === 'done') return false;
@@ -250,7 +234,6 @@ export const TaskProvider = ({ children }) => {
     });
   }, [tasks]);
 
-  // Derived: Board columns
   const todoTasks = useMemo(() => tasks.filter((t) => t.status === 'todo'), [tasks]);
   const inProgressTasks = useMemo(() => tasks.filter((t) => t.status === 'in_progress'), [tasks]);
   const doneTasks = useMemo(() => tasks.filter((t) => t.status === 'done' || t.completed), [tasks]);
@@ -268,7 +251,7 @@ export const TaskProvider = ({ children }) => {
         updateTaskStatus,
         toggleTaskComplete,
         deleteTask,
-        // Filters
+
         filterStatus,
         setFilterStatus,
         filterPriority,
@@ -279,7 +262,7 @@ export const TaskProvider = ({ children }) => {
         setSearchQuery,
         sortBy,
         setSortBy,
-        // Lists
+
         filteredTasks,
         todayTasks,
         dueSoonTasks,

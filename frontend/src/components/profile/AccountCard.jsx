@@ -12,7 +12,7 @@ export const AccountCard = ({
       </h3>
 
       <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-card divide-y divide-slate-100 dark:divide-slate-800">
-        {/* Row 1: Change Password */}
+
         <div className="flex items-center justify-between pb-5">
           <div>
             <h4 className="text-sm font-semibold text-slate-800 dark:text-slate-200">
@@ -31,7 +31,6 @@ export const AccountCard = ({
           </button>
         </div>
 
-        {/* Row 2: Log out */}
         <div className="flex items-center justify-between py-5">
           <div>
             <h4 className="text-sm font-semibold text-slate-800 dark:text-slate-200">
@@ -50,7 +49,6 @@ export const AccountCard = ({
           </button>
         </div>
 
-        {/* Row 3: Delete account */}
         <div className="flex items-center justify-between pt-5">
           <div>
             <h4 className="text-sm font-semibold text-rose-600 dark:text-rose-400">

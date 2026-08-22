@@ -1,6 +1,5 @@
 const API_URL = process.env.API_URL || 'http://localhost:5000/api';
 
-
 async function runTests() {
   console.log('🚀 Starting TaskFlow End-to-End Automated Test Suite...\n');
   let passed = 0;
@@ -17,11 +16,10 @@ async function runTests() {
   };
 
   try {
-    // 1. Health check
+
     const healthRes = await fetch(`${API_URL}/health`).then((r) => r.json());
     assert(healthRes.status === 'ok', 'API Health Check returns 200 OK');
 
-    // 2. Login with Seed User Maya Chen
     const loginRes = await fetch(`${API_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -38,36 +36,30 @@ async function runTests() {
       Authorization: `Bearer ${token}`,
     };
 
-    // 3. Verify Auth /me
     const meRes = await fetch(`${API_URL}/auth/me`, { headers: authHeaders }).then((r) => r.json());
     assert(meRes.success === true && meRes.data.name === 'Maya Chen', 'Auth /me returns Maya Chen');
 
-    // 4. Fetch Stats
     const statsRes = await fetch(`${API_URL}/tasks/stats`, { headers: authHeaders }).then((r) => r.json());
     assert(
       statsRes.success === true && typeof statsRes.data.total === 'number',
       `Task Stats dynamic calculation (Total: ${statsRes.data.total}, Completed: ${statsRes.data.completed}, Pending: ${statsRes.data.pending}, Overdue: ${statsRes.data.overdue})`
     );
 
-    // 5. Fetch all tasks
     const tasksRes = await fetch(`${API_URL}/tasks`, { headers: authHeaders }).then((r) => r.json());
     assert(tasksRes.success === true && tasksRes.data.length > 0, `Fetch all tasks (Found ${tasksRes.data.length} tasks)`);
 
-    // 6. Test Search Query
     const searchRes = await fetch(`${API_URL}/tasks?search=API`, { headers: authHeaders }).then((r) => r.json());
     assert(
       searchRes.success === true && searchRes.data.some((t) => t.title.includes('API')),
       'Search tasks by query "API" works'
     );
 
-    // 7. Test Priority Filter
     const highRes = await fetch(`${API_URL}/tasks?priority=high`, { headers: authHeaders }).then((r) => r.json());
     assert(
       highRes.success === true && highRes.data.every((t) => t.priority === 'high'),
       'Filter tasks by Priority "High" works'
     );
 
-    // 8. Create a new Task
     const createRes = await fetch(`${API_URL}/tasks`, {
       method: 'POST',
       headers: authHeaders,
@@ -84,7 +76,6 @@ async function runTests() {
     assert(createRes.success === true && createRes.data.title === 'Automated E2E Verification Task', 'Create Task via POST /api/tasks works');
     const newTaskId = createRes.data._id;
 
-    // 9. Update Task Status (Simulate Kanban Drag & Drop TO DO -> IN PROGRESS)
     const statusRes = await fetch(`${API_URL}/tasks/${newTaskId}/status`, {
       method: 'PATCH',
       headers: authHeaders,
@@ -96,7 +87,6 @@ async function runTests() {
       'Kanban Status update (PATCH /api/tasks/:id/status) works'
     );
 
-    // 10. Toggle Task Completion (Checkbox click)
     const completeRes = await fetch(`${API_URL}/tasks/${newTaskId}/complete`, {
       method: 'PATCH',
       headers: authHeaders,
@@ -107,7 +97,6 @@ async function runTests() {
       'Toggle Complete (PATCH /api/tasks/:id/complete) works and syncs status to "done"'
     );
 
-    // 11. Update Task details (PUT /api/tasks/:id)
     const updateRes = await fetch(`${API_URL}/tasks/${newTaskId}`, {
       method: 'PUT',
       headers: authHeaders,
@@ -122,7 +111,6 @@ async function runTests() {
       'Update Task details (PUT /api/tasks/:id) works'
     );
 
-    // 12. Delete the created task
     const deleteRes = await fetch(`${API_URL}/tasks/${newTaskId}`, {
       method: 'DELETE',
       headers: authHeaders,
@@ -130,7 +118,6 @@ async function runTests() {
 
     assert(deleteRes.success === true, 'Delete Task (DELETE /api/tasks/:id) works');
 
-    // 13. Update User Preferences (Theme & Default View)
     const prefRes = await fetch(`${API_URL}/users/preferences`, {
       method: 'PUT',
       headers: authHeaders,
@@ -144,12 +131,11 @@ async function runTests() {
 
     assert(
       prefRes.success === true &&
-        prefRes.data.theme === 'dark' &&
-        prefRes.data.defaultView === 'board',
+      prefRes.data.theme === 'dark' &&
+      prefRes.data.defaultView === 'board',
       'Update User Preferences (Theme, View, Calendar, Email) works'
     );
 
-    // 14. Reset Preferences back to Light
     await fetch(`${API_URL}/users/preferences`, {
       method: 'PUT',
       headers: authHeaders,
@@ -161,7 +147,6 @@ async function runTests() {
       }),
     });
 
-    // 15. Register a temporary user to test full registration and account cascade deletion
     const testEmail = `testuser_${Date.now()}@example.com`;
     const regRes = await fetch(`${API_URL}/auth/register`, {
       method: 'POST',
@@ -182,14 +167,12 @@ async function runTests() {
       Authorization: `Bearer ${tempToken}`,
     };
 
-    // Create a task for temp user
     await fetch(`${API_URL}/tasks`, {
       method: 'POST',
       headers: tempHeaders,
       body: JSON.stringify({ title: 'Temporary User Task' }),
     });
 
-    // Delete temp account (testing cascade delete of account and tasks)
     const deleteAccRes = await fetch(`${API_URL}/users/account`, {
       method: 'DELETE',
       headers: tempHeaders,

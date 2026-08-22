@@ -1,6 +1,5 @@
 import { Task } from '../models/Task.js';
 
-// Helper to get start and end of a given date (local)
 const getDayBounds = (date = new Date()) => {
   const start = new Date(date);
   start.setHours(0, 0, 0, 0);
@@ -9,9 +8,6 @@ const getDayBounds = (date = new Date()) => {
   return { start, end };
 };
 
-// @desc    Get all tasks for the logged in user with filtering, search, and sorting
-// @route   GET /api/tasks
-// @access  Private
 export const getTasks = async (req, res, next) => {
   try {
     const {
@@ -19,14 +15,13 @@ export const getTasks = async (req, res, next) => {
       priority,
       category,
       search,
-      view, // 'today', 'dueSoon', 'all'
+      view, 
       sort = 'dueDate',
       order = 'asc',
     } = req.query;
 
     const query = { userId: req.user._id };
 
-    // Status filter
     if (status) {
       if (status === 'active') {
         query.completed = false;
@@ -38,17 +33,14 @@ export const getTasks = async (req, res, next) => {
       }
     }
 
-    // Priority filter
     if (priority && priority !== 'all' && priority !== 'All priorities') {
       query.priority = priority.toLowerCase();
     }
 
-    // Category filter
     if (category && category !== 'all') {
       query.category = new RegExp(`^${category}$`, 'i');
     }
 
-    // Search query (title and description)
     if (search && search.trim()) {
       const searchRegex = new RegExp(search.trim(), 'i');
       query.$and = query.$and || [];
@@ -57,24 +49,22 @@ export const getTasks = async (req, res, next) => {
       });
     }
 
-    // View specific filter
     const now = new Date();
     const { start: todayStart, end: todayEnd } = getDayBounds(now);
 
     if (view === 'today') {
-      // Due today OR overdue and incomplete
+
       query.$or = [
         { dueDate: { $gte: todayStart, $lte: todayEnd } },
         { dueDate: { $lt: todayStart }, completed: false },
       ];
     } else if (view === 'dueSoon') {
-      // Due tomorrow and onwards (next 7 days)
+
       const nextWeekEnd = new Date(todayEnd);
       nextWeekEnd.setDate(nextWeekEnd.getDate() + 7);
       query.dueDate = { $gt: todayEnd, $lte: nextWeekEnd };
     }
 
-    // Sorting
     let sortOptions = {};
     const sortDirection = order === 'desc' ? -1 : 1;
 
@@ -83,7 +73,7 @@ export const getTasks = async (req, res, next) => {
         sortOptions = { dueDate: sortDirection, createdAt: -1 };
         break;
       case 'priority': {
-        // High -> Medium -> Low or vice versa
+
         sortOptions = { priority: sortDirection, dueDate: 1 };
         break;
       }
@@ -114,9 +104,6 @@ export const getTasks = async (req, res, next) => {
   }
 };
 
-// @desc    Get dashboard metrics / task stats for logged-in user
-// @route   GET /api/tasks/stats
-// @access  Private
 export const getTaskStats = async (req, res, next) => {
   try {
     const userId = req.user._id;
@@ -126,7 +113,6 @@ export const getTaskStats = async (req, res, next) => {
     const sevenDaysLater = new Date(todayEnd);
     sevenDaysLater.setDate(sevenDaysLater.getDate() + 7);
 
-    // Run parallel aggregation / count queries
     const [
       total,
       completed,
@@ -135,27 +121,27 @@ export const getTaskStats = async (req, res, next) => {
       dueToday,
       dueSoon,
     ] = await Promise.all([
-      // Total tasks
+
       Task.countDocuments({ userId }),
-      // Completed tasks
+
       Task.countDocuments({
         userId,
         $or: [{ completed: true }, { status: 'done' }],
       }),
-      // Pending tasks
+
       Task.countDocuments({
         userId,
         completed: false,
         status: { $ne: 'done' },
       }),
-      // Overdue tasks (due date before today, and not completed)
+
       Task.countDocuments({
         userId,
         dueDate: { $lt: todayStart, $ne: null },
         completed: false,
         status: { $ne: 'done' },
       }),
-      // Tasks due today (due date today, or overdue and incomplete)
+
       Task.countDocuments({
         userId,
         $or: [
@@ -163,7 +149,7 @@ export const getTaskStats = async (req, res, next) => {
           { dueDate: { $lt: todayStart, $ne: null }, completed: false },
         ],
       }),
-      // Tasks due soon (next 7 days)
+
       Task.countDocuments({
         userId,
         dueDate: { $gt: todayEnd, $lte: sevenDaysLater },
@@ -188,9 +174,6 @@ export const getTaskStats = async (req, res, next) => {
   }
 };
 
-// @desc    Get single task
-// @route   GET /api/tasks/:id
-// @access  Private
 export const getTaskById = async (req, res, next) => {
   try {
     const task = await Task.findOne({
@@ -212,9 +195,6 @@ export const getTaskById = async (req, res, next) => {
   }
 };
 
-// @desc    Create a new task
-// @route   POST /api/tasks
-// @access  Private
 export const createTask = async (req, res, next) => {
   try {
     const { title, description, status, priority, category, dueDate, completed, order } =
@@ -250,9 +230,6 @@ export const createTask = async (req, res, next) => {
   }
 };
 
-// @desc    Update task
-// @route   PUT /api/tasks/:id
-// @access  Private
 export const updateTask = async (req, res, next) => {
   try {
     const task = await Task.findOne({
@@ -296,9 +273,6 @@ export const updateTask = async (req, res, next) => {
   }
 };
 
-// @desc    Update task status (e.g. for drag and drop Kanban)
-// @route   PATCH /api/tasks/:id/status
-// @access  Private
 export const updateTaskStatus = async (req, res, next) => {
   try {
     const { status, order } = req.body;
@@ -336,9 +310,6 @@ export const updateTaskStatus = async (req, res, next) => {
   }
 };
 
-// @desc    Toggle task completion status
-// @route   PATCH /api/tasks/:id/complete
-// @access  Private
 export const toggleTaskComplete = async (req, res, next) => {
   try {
     const task = await Task.findOne({
@@ -366,9 +337,6 @@ export const toggleTaskComplete = async (req, res, next) => {
   }
 };
 
-// @desc    Delete task
-// @route   DELETE /api/tasks/:id
-// @access  Private
 export const deleteTask = async (req, res, next) => {
   try {
     const task = await Task.findOneAndDelete({

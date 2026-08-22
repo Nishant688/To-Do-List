@@ -1,10 +1,5 @@
 import mongoose from 'mongoose';
 
-/**
- * Global cache for Mongoose connection across serverless invocations.
- * In development and serverless functions, this prevents creating multiple
- * database connections on each invocation / hot reload.
- */
 let cached = global.mongoose;
 
 if (!cached) {
@@ -12,7 +7,7 @@ if (!cached) {
 }
 
 export const connectDB = async () => {
-  // If connection is already open and ready, reuse it
+
   if (cached.conn && mongoose.connection.readyState >= 1) {
     return cached.conn;
   }
@@ -50,4 +45,3 @@ export const connectDB = async () => {
     throw error;
   }
 };
-

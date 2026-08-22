@@ -84,7 +84,6 @@ export const TaskModal = ({ isOpen, onClose, taskToEdit = null }) => {
           </div>
         )}
 
-        {/* Title */}
         <div>
           <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
             Title <span className="text-rose-500">*</span>
@@ -99,7 +98,6 @@ export const TaskModal = ({ isOpen, onClose, taskToEdit = null }) => {
           />
         </div>
 
-        {/* Description */}
         <div>
           <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
             Description
@@ -113,7 +111,6 @@ export const TaskModal = ({ isOpen, onClose, taskToEdit = null }) => {
           />
         </div>
 
-        {/* 2-column Grid for Status & Priority */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
@@ -146,7 +143,6 @@ export const TaskModal = ({ isOpen, onClose, taskToEdit = null }) => {
           </div>
         </div>
 
-        {/* 2-column Grid for Category & Due Date */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
@@ -177,7 +173,6 @@ export const TaskModal = ({ isOpen, onClose, taskToEdit = null }) => {
           </div>
         </div>
 
-        {/* Footer Actions */}
         <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-slate-100 dark:border-slate-800">
           <button
             type="button"

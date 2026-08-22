@@ -23,7 +23,7 @@ export const DashboardPage = () => {
 
   return (
     <div className="space-y-7 animate-in fade-in duration-200">
-      {/* Header Section */}
+
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
         <div>
           <span className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1">
@@ -38,10 +38,8 @@ export const DashboardPage = () => {
         </span>
       </div>
 
-      {/* Quick Add Bar */}
       <QuickAddTask />
 
-      {/* 4 Stat Cards Row */}
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard type="total" count={stats.total} />
         <StatCard type="completed" count={stats.completed} />
@@ -49,13 +47,10 @@ export const DashboardPage = () => {
         <StatCard type="overdue" count={stats.overdue} />
       </div>
 
-      {/* Today Section */}
       <TodayTasks onEditTask={handleEditTask} />
 
-      {/* Due Soon Section */}
       <DueSoonTasks onEditTask={handleEditTask} />
 
-      {/* Edit Task Modal */}
       <TaskModal
         isOpen={isModalOpen}
         onClose={() => {

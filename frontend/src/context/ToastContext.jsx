@@ -30,18 +30,17 @@ export const ToastProvider = ({ children }) => {
       value={{ addToast, removeToast, showSuccess, showError, showInfo }}
     >
       {children}
-      {/* Toast floating container */}
+
       <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none">
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className={`pointer-events-auto flex items-center justify-between p-3.5 rounded-xl shadow-modal text-sm font-medium border transition-all duration-300 animate-in fade-in slide-in-from-bottom-3 ${
-              toast.type === 'success'
+            className={`pointer-events-auto flex items-center justify-between p-3.5 rounded-xl shadow-modal text-sm font-medium border transition-all duration-300 animate-in fade-in slide-in-from-bottom-3 ${toast.type === 'success'
                 ? 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 border-emerald-200 dark:border-emerald-800/50'
                 : toast.type === 'error'
-                ? 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 border-red-200 dark:border-red-800/50'
-                : 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 border-slate-200 dark:border-slate-700'
-            }`}
+                  ? 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 border-red-200 dark:border-red-800/50'
+                  : 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 border-slate-200 dark:border-slate-700'
+              }`}
           >
             <div className="flex items-center gap-2.5">
               {toast.type === 'success' && (

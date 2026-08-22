@@ -87,7 +87,6 @@ export const RegisterPage = () => {
               </div>
             )}
 
-            {/* Name */}
             <div>
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                 Full Name
@@ -105,7 +104,6 @@ export const RegisterPage = () => {
               </div>
             </div>
 
-            {/* Email */}
             <div>
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                 Email Address
@@ -123,7 +121,6 @@ export const RegisterPage = () => {
               </div>
             </div>
 
-            {/* Password */}
             <div>
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                 Password
@@ -148,7 +145,6 @@ export const RegisterPage = () => {
               </div>
             </div>
 
-            {/* Confirm Password */}
             <div>
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                 Confirm Password
@@ -166,7 +162,6 @@ export const RegisterPage = () => {
               </div>
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}

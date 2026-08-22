@@ -30,7 +30,7 @@ export const PreferencesCard = () => {
       </h3>
 
       <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-card divide-y divide-slate-100 dark:divide-slate-800">
-        {/* Row 1: Theme */}
+
         <div className="flex items-center justify-between pb-5">
           <div>
             <h4 className="text-sm font-semibold text-slate-800 dark:text-slate-200">
@@ -40,34 +40,31 @@ export const PreferencesCard = () => {
               Dark theme is coming to every screen
             </p>
           </div>
-          {/* Segmented Light/Dark Control */}
+
           <div className="flex items-center p-1 bg-slate-100 dark:bg-slate-800 rounded-xl">
             <button
               type="button"
               onClick={() => handlePreferenceChange('theme', 'light')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                preferences.theme === 'light'
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${preferences.theme === 'light'
                   ? 'bg-white text-slate-900 shadow-xs'
                   : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
-              }`}
+                }`}
             >
               Light
             </button>
             <button
               type="button"
               onClick={() => handlePreferenceChange('theme', 'dark')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                preferences.theme === 'dark'
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${preferences.theme === 'dark'
                   ? 'bg-slate-900 text-white shadow-xs'
                   : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
-              }`}
+                }`}
             >
               Dark
             </button>
           </div>
         </div>
 
-        {/* Row 2: Default View */}
         <div className="flex items-center justify-between py-5">
           <div>
             <h4 className="text-sm font-semibold text-slate-800 dark:text-slate-200">
@@ -90,7 +87,6 @@ export const PreferencesCard = () => {
           </div>
         </div>
 
-        {/* Row 3: Week Starts On */}
         <div className="flex items-center justify-between py-5">
           <div>
             <h4 className="text-sm font-semibold text-slate-800 dark:text-slate-200">
@@ -113,7 +109,6 @@ export const PreferencesCard = () => {
           </div>
         </div>
 
-        {/* Row 4: Email Reminders Toggle */}
         <div className="flex items-center justify-between pt-5">
           <div>
             <h4 className="text-sm font-semibold text-slate-800 dark:text-slate-200">
@@ -128,14 +123,12 @@ export const PreferencesCard = () => {
             role="switch"
             aria-checked={preferences.emailReminders}
             onClick={() => handlePreferenceChange('emailReminders', !preferences.emailReminders)}
-            className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-hidden ${
-              preferences.emailReminders ? 'bg-brand-500' : 'bg-slate-200 dark:bg-slate-700'
-            }`}
+            className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-hidden ${preferences.emailReminders ? 'bg-brand-500' : 'bg-slate-200 dark:bg-slate-700'
+              }`}
           >
             <span
-              className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out ${
-                preferences.emailReminders ? 'translate-x-5' : 'translate-x-0'
-              }`}
+              className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out ${preferences.emailReminders ? 'translate-x-5' : 'translate-x-0'
+                }`}
             />
           </button>
         </div>

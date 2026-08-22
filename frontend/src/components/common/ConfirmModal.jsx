@@ -9,7 +9,7 @@ export const ConfirmModal = ({
   title = 'Confirm Action',
   message = 'Are you sure you want to perform this action?',
   confirmText = 'Delete',
-  confirmVariant = 'danger', // 'danger' | 'primary'
+  confirmVariant = 'danger', 
   loading = false,
 }) => {
   return (
@@ -39,11 +39,10 @@ export const ConfirmModal = ({
             type="button"
             onClick={onConfirm}
             disabled={loading}
-            className={`px-4 py-2 text-sm font-medium text-white rounded-xl transition-colors shadow-xs ${
-              confirmVariant === 'danger'
+            className={`px-4 py-2 text-sm font-medium text-white rounded-xl transition-colors shadow-xs ${confirmVariant === 'danger'
                 ? 'bg-rose-600 hover:bg-rose-700 disabled:bg-rose-400'
                 : 'bg-brand-500 hover:bg-brand-600 disabled:bg-brand-400'
-            }`}
+              }`}
           >
             {loading ? 'Processing...' : confirmText}
           </button>

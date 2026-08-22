@@ -7,7 +7,6 @@ const api = axios.create({
   },
 });
 
-// Attach JWT token to every request if present
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('taskflow_token');
@@ -19,12 +18,11 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Response interceptor for token expiration / unauthorized
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      // If token expired or invalid, remove token and dispatch custom event
+
       localStorage.removeItem('taskflow_token');
       localStorage.removeItem('taskflow_user');
       window.dispatchEvent(new Event('taskflow_auth_error'));

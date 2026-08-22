@@ -13,7 +13,6 @@ import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-// All task routes require authentication
 router.use(protect);
 
 router.route('/')

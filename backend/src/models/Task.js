@@ -52,7 +52,6 @@ const taskSchema = new mongoose.Schema(
   }
 );
 
-// Sync status and completed flag prior to saving
 taskSchema.pre('save', function (next) {
   if (this.isModified('status')) {
     this.completed = this.status === 'done';

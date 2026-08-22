@@ -7,22 +7,21 @@ export const ProfileCard = ({ onEditProfile }) => {
 
   const initials = user?.name
     ? user.name
-        .split(' ')
-        .map((n) => n[0])
-        .join('')
-        .toUpperCase()
-        .substring(0, 2)
+      .split(' ')
+      .map((n) => n[0])
+      .join('')
+      .toUpperCase()
+      .substring(0, 2)
     : 'MC';
 
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-card flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       <div className="flex items-center gap-4">
-        {/* Large Initials Avatar */}
+
         <div className="w-16 h-16 rounded-full bg-brand-100 dark:bg-brand-950 text-brand-700 dark:text-brand-300 font-bold text-xl flex items-center justify-center shrink-0 border-2 border-brand-200/60 dark:border-brand-800/60 shadow-xs">
           {initials}
         </div>
 
-        {/* User Details */}
         <div>
           <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">
             {user?.name || 'Maya Chen'}
@@ -36,7 +35,6 @@ export const ProfileCard = ({ onEditProfile }) => {
         </div>
       </div>
 
-      {/* Edit Profile Button */}
       <button
         type="button"
         onClick={onEditProfile}

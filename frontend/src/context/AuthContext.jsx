@@ -16,7 +16,6 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(() => localStorage.getItem('taskflow_token') || null);
   const [loading, setLoading] = useState(true);
 
-  // Sync theme with DOM based on user preference
   useEffect(() => {
     const theme = user?.preferences?.theme || 'light';
     if (theme === 'dark') {
@@ -26,7 +25,6 @@ export const AuthProvider = ({ children }) => {
     }
   }, [user?.preferences?.theme]);
 
-  // Load user data on startup if token exists
   useEffect(() => {
     const loadUser = async () => {
       const storedToken = localStorage.getItem('taskflow_token');
@@ -47,7 +45,6 @@ export const AuthProvider = ({ children }) => {
 
     loadUser();
 
-    // Listen for custom auth error events from axios interceptor
     const handleAuthError = () => {
       setUser(null);
       setToken(null);
@@ -84,7 +81,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await authService.logout();
     } catch {
-      // ignore
+
     } finally {
       setUser(null);
       setToken(null);

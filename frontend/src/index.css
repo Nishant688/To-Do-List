@@ -8,7 +8,6 @@
   }
 }
 
-/* Custom scrollbar for Kanban board and lists */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -35,7 +34,6 @@
   background: #475569;
 }
 
-/* Dragging visual cues */
 .kanban-card {
   transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
 }
